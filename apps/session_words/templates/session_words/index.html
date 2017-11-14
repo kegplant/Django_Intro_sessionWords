@@ -12,11 +12,11 @@
         <h3>Add a new word</h3>
         <input type='text' name='word'>
         <ul>Choose color
-            <li><input type=radio name='color' value='Red'> Red</li>
+            <li><input type=radio name='color' value='Red' checked='checked'> Red</li>
             <li><input type=radio name='color' value='Blue'> Blue</li>
             <li><input type=radio name='color' value='Green'> Green</li>
         </ul>
-        <label><input type="checkbox" name='isBig'> show in BIG fonts!</label>
+        <label><input type="checkbox" name='isBig' checked> show in BIG fonts!</label>
         <button>Add to Session</button>
     </form>
     <div>
@@ -24,8 +24,8 @@
     {% if words%}
         {%for word in words%}
             <p>
-                <span style='color:{{word.color}}; font-weight:bold'>{{word.word}}</span>
-                - added on date
+                <span style='color:{{word.color}}; font-weight:{{word.weight}};'>{{word.word}}</span>
+                - added on {{word.date}}
             </p>
         {%endfor%}
     {%endif%}

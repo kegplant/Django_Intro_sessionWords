@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from datetime import datetime
 # the index function is called when root is visited
 def index(request):
     try:
@@ -17,9 +18,19 @@ def process(request):
     except:
         request.session['words']=[]
 
-    if request.method=='POST':
-        newWord={}
-        request.session['words'].append(request.POST)
+    if request.method=='POST':    
+        try:
+            request.POST['isBig']
+            weight='bold'
+        except:
+            weight='normal'
+        newWord={
+            'word':request.POST['word'],
+            'color':request.POST['color'],
+            'weight':weight,
+            'date':datetime.now().strftime('%H:%M:%S%p, %b %d %Y')
+        }
+        request.session['words'].append(newWord)
         request.session.modified = True
 
     return redirect('/')
